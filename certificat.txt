@@ -1,0 +1,40 @@
+[1m══════════════════════════════════════════════════════════════[0m
+[1m Fichiers générés dans ./pki-web.lab.local/[0m
+[1m══════════════════════════════════════════════════════════════[0m
+
+  [0;36mca.crt                  [0m → Importer dans Firefox / navigateur
+  [0;36mca.key                  [0m → Clé privée CA (ne pas distribuer)
+  [0;36mserver.key              [0m → Apache : SSLCertificateKeyFile
+  [0;36mserver.crt              [0m → Apache : SSLCertificateFile
+  [0;36mserver-fullchain.crt    [0m → Chaîne complète (cert + CA)
+  [0;36mhaproxy-bundle.pem      [0m → HAProxy : bind ... ssl crt ...
+
+[1mEmpreinte CA (SHA-256) :[0m
+  B6:93:63:1C:07:DF:02:51:C6:A9:D5:28:20:20:D0:EA:92:BA:C4:DD:5F:65:98:20:6E:DC:2B:1C:87:39:FA:B0
+
+[1mDétail du certificat serveur :[0m
+  subject=C=FR, ST=Hauts-de-France, L=Amiens, O=Labo BTS SIO, OU=Serveur Web, CN=web.lab.local
+  issuer=C=FR, ST=Hauts-de-France, L=Amiens, O=Labo BTS SIO, OU=AC Pedagogique, CN=AC Labo BTS SIO
+  notBefore=Mar 31 06:28:28 2026 GMT
+  notAfter=Jul  3 06:28:28 2028 GMT
+  X509v3 Subject Alternative Name: 
+      DNS:web.lab.local, DNS:www.web.lab.local, IP Address:127.0.0.1, IP Address:0:0:0:0:0:0:0:1
+
+[1m══════════════════════════════════════════════════════════════[0m
+[1m Aide-mémoire configuration[0m
+[1m══════════════════════════════════════════════════════════════[0m
+
+  Apache (vhost SSL) :
+    SSLCertificateFile    /chemin/server.crt
+    SSLCertificateKeyFile /chemin/server.key
+    SSLCACertificateFile  /chemin/ca.crt
+
+  HAProxy (frontend) :
+    bind *:443 ssl crt /chemin/haproxy-bundle.pem
+
+  Firefox — importer la CA :
+    Paramètres → Vie privée → Certificats → Voir les certificats
+    → Autorités → Importer → ca.crt
+    → Cocher « Identifier les sites web »
+
+[1m══════════════════════════════════════════════════════════════[0m
